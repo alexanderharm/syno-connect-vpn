@@ -31,7 +31,7 @@ fi
 today=$(date +'%Y-%m-%d')
 
 # self update run once daily
-if [ ! -z "${git}" ] && [ -d "$(dirname "$0")/.git" ] && [ -d "$(dirname "$0")/autoupdate" ]; then
+if [ ! -z "${git}" ] && [ -d "$(dirname "$0")/.git" ] && [ -f "$(dirname "$0")/autoupdate" ]; then
 	if [ ! -f /tmp/.synoConnectVpnUpdate ] || [ "${today}" != "$(date -r /tmp/.synoConnectVpnUpdate +'%Y-%m-%d')" ]; then
 		echo "Checking for updates..."
 		# touch file to indicate update has run once
