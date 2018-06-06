@@ -35,7 +35,7 @@ touch syno-connect-vpn/autoupdate
 - make the script executable by connecting via `ssh` to the NAS and executing the following command
 
 ```bash
-chmod 755 /volume1/sysadmin/synoConnectVpn.sh
+chmod 755 /volume1/sysadmin/synoConnectVpn.sh "<VPN Connection 1>" "<VPN Connection 2>"
 ```
 
 #### 3. Setup
