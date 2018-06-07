@@ -56,18 +56,19 @@ if [ ! -z "${git}" ] && [ -d "$(dirname "$0")/.git" ] && [ -f "$(dirname "$0")/a
 fi
 
 # stale check
-stale=$false
+stale=false
 
 # loop through passed VPN connections
 for (( i=0; i<${#vpnConnections[@]}; i++ )); do
 
 	# check if VPN connections are up and if so continue
 	if synovpnc get_conn | grep -q "Config Name : ${vpnConnections[$i]}"; then
+		echo "VPN ${vpnConnections[$i]} is up."
 		continue
 	fi
 
 	echo "${vpnConnections[$i]} is down."
-	stale=$true
+	stale=true
 
 	# determine ID
 	# split config files per connection
@@ -97,11 +98,11 @@ for (( i=0; i<${#vpnConnections[@]}; i++ )); do
 	synovpnc connect --id="${connectionId}"
 
 	# cleanup
-	rm xx*
+	rm -f xx*
 done
 
 # re-run if stale connection detected to make sure it is up
-if $stale; then
+if [ "${stale}" = true ]; then
 	sleep 30
 	exec "$(pwd -P)/synoConnectVpn.sh" "$@"
 fi
