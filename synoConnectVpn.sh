@@ -104,7 +104,7 @@ done
 # re-run if stale connection detected to make sure it is up
 if [ "${stale}" = true ]; then
 	sleep 30
-	exec "$(pwd -P)/synoConnectVpn.sh" "$@"
+	exec "$(dirname "$0")/synoConnectVpn.sh" "$@"
 fi
 
 # exit
